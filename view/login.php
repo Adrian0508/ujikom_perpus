@@ -77,9 +77,8 @@ unset($_SESSION['notifikasiBerhasil']);
             <img class="gambar-kiri" src="../assets/gambar-kiri.png" alt="" />
           </div>
         </div>
-        <div class="col-lg-6">
-          <form action="" method="post">
-            <img src="../assets/logo-2.png" class="ms-5" alt="" />
+        <div class="col-lg-6 ">
+          <form action="" method="post" style="margin-top: 25%;">
             <h2 class="text-center" style="color: #4682B4; font-weight: 700">
               Masukan Akun Anda
             </h2>
