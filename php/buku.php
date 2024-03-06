@@ -38,14 +38,15 @@ class Database
     }
 
     public function listBook() {
-        $sql = "SELECT * FROM peminjaman p, user u, buku b where p.UserID = u.userID and p.BukuID = b.BukuID";
+        $sql = "SELECT * FROM peminjaman p, user u, buku b WHERE p.UserID = u.userID AND p.BukuID = b.BukuID ORDER BY p.TanggalPeminjaman DESC";
         $result = $this->conn->query($sql);
+        
         if ($result->num_rows > 0) {
-            $users = array();
+            $books = array();
             while ($row = $result->fetch_assoc()) {
-                $users[] = $row;
+                $books[] = $row;
             }
-            return $users;
+            return $books;
         } else {
             return [];
         }

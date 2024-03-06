@@ -172,10 +172,10 @@ unset($_SESSION['notifikasiBerhasil']);
                                     <td data-label="Status Peminjaman">
                                         <p style="
                                     <?php if ($row['StatusPeminjaman'] === 'Dipinjam') : ?>
-                                    background-color:#00CC39; 
+                                    background-color:#4682B4; 
                                     <?php else : ?>
-                                        background-color:green; 
-                                        color:black !important; 
+                                        background-color:#0B60B0;
+                                        color:white !important; 
                                     <?php endif; ?>
                                     
                                     border-radius:40px; color:white; margin-bottom:5px;"><?= $row['StatusPeminjaman'] ?></p>
