@@ -45,7 +45,7 @@ unset($_SESSION['notifikasiBerhasil']);
     .kembalikan {
         text-decoration : none;
         padding : 5px 15px;
-        background-color: green;
+        background-color: #4682B4;
         color : white;
     }
     .kembalikan:hover {
@@ -176,7 +176,12 @@ unset($_SESSION['notifikasiBerhasil']);
                                     <td data-label="Buku ID"><?= $row['Penulis'] ?></td>
                                     <td data-label="Tanggal Peminjaman"><?= $row['TanggalPeminjaman'] ?></td>
                                     <td data-label="Tanggal Pengembalian"><?= $row['TanggalPengembalian'] ?></td>
-                                    <td data-label="Aksi"><a class="kembalikan" href="data-peminjaman-user.php?kembalikan=<?= $row['PeminjamanID'] ?>">Kembalikan</a></td>
+                                    <td data-label="Aksi">
+                                        <form action="data-peminjaman-user.php" method="GET">
+                                            <input type="hidden" name="kembalikan" value="<?= $row['PeminjamanID'] ?>">
+                                            <button type="submit" class="kembalikan" onclick="return confirm('Apakah Anda yakin ingin mengembalikan buku ini?')">Kembalikan</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php $i += 1; ?>
                             <?php endforeach; ?>

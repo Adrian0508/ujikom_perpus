@@ -13,22 +13,22 @@ if(!isset($_SESSION['id']) || $_SESSION['user'] === 'admin' || $_SESSION['user']
     $data = $listkoleksi;
 
     if(isset($_GET['hapus'])) {
-      $hapusKoleksi = $database->hapusKoleksi(intval($_GET['hapus']));
-      if($hapusKoleksi === 'berhasil') {
-        $_SESSION['notifikasiBerhasil'] = 'berhasil'; 
-      } else if($hapusKoleksi === 'gagal') {
-        $_SESSION['notifikasiBerhasil'] = 'gagal'; 
-      }
+        $hapusKoleksi = $database->hapusKoleksi(intval($_GET['hapus']));
+        if($hapusKoleksi === 'berhasil') {
+            $_SESSION['notifikasiBerhasil'] = 'berhasil'; 
+        } else if($hapusKoleksi === 'gagal') {
+            $_SESSION['notifikasiBerhasil'] = 'gagal'; 
+        }
       
-    header("Location: koleksi.php?id".$_GET['hapus']);
-    exit;
+        header("Location: koleksi.php?id".$_GET['hapus']);
+        exit;
     }
-
 }
 
 $notifikasiBerhasil = isset($_SESSION['notifikasiBerhasil']) ? $_SESSION['notifikasiBerhasil'] : null;
 unset($_SESSION['notifikasiBerhasil']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,44 +47,41 @@ unset($_SESSION['notifikasiBerhasil']);
             <div class="col-lg-2 col-md-1 responsif-hp" style="background-color: #4682B4; height: 100vh">
                 <img class="mt-3 ms-4 mb-1 logo1" src="../assets/logo-3.png" width="150" alt="" />
                 <div class="bungkus-link">
-            <img src="../assets/icon-user.png" width="25" alt="" />
-            <a href="profil.php" class="link">Profil anda</a>
-          </div>
-          <div class="bungkus-link">
-            <img src="../assets/icon-list.png" alt="" />
-            <a href="list-buku.php" class="link">Daftar Buku</a>
-          </div>
+                    <img src="../assets/icon-user.png" width="25" alt="" />
+                    <a href="profil.php" class="link">Profil anda</a>
+                </div>
+                <div class="bungkus-link">
+                    <img src="../assets/icon-list.png" alt="" />
+                    <a href="list-buku.php" class="link">Daftar Buku</a>
+                </div>
           
-          <?php if($_SESSION['user'] === 'admin' || $_SESSION['user'] === 'petugas') :?>
-          <div class="bungkus-link">
-            <img src="../assets/icon-pinjam.png" alt="" />
-            <a href="data-peminjaman-admin.php" class="link">Peminjaman Buku</a>
-          </div>
-          <?php endif; ?>
+                <?php if($_SESSION['user'] === 'admin' || $_SESSION['user'] === 'petugas') :?>
+                <div class="bungkus-link">
+                    <img src="../assets/icon-pinjam.png" alt="" />
+                    <a href="data-peminjaman-admin.php" class="link">Peminjaman Buku</a>
+                </div>
+                <?php endif; ?>
           
-          <?php if($_SESSION['user'] === 'user') :?>
-          <div class="bungkus-link">
-            <img src="../assets/icon-tambah-buku.png" alt="" />
-            <a href="data-peminjaman-user.php" class="link">Peminjaman Saya</a>
-          </div>
-          <?php endif; ?>
+                <?php if($_SESSION['user'] === 'user') :?>
+                <div class="bungkus-link">
+                    <img src="../assets/icon-tambah-buku.png" alt="" />
+                    <a href="data-peminjaman-user.php" class="link">Peminjaman Saya</a>
+                </div>
+                <?php endif; ?>
 
-          <?php if($_SESSION['user'] === 'user') :?>
-          <div class="bungkus-link">
-            <img src="../assets/icon-tambah-peminjam.png" alt="" />
-            <a href="koleksi.php" class="link">Koleksi Saya</a>
-          </div>
-          <?php endif;?>
+                <?php if($_SESSION['user'] === 'user') :?>
+                <div class="bungkus-link">
+                    <img src="../assets/icon-tambah-peminjam.png" alt="" />
+                    <a href="koleksi.php" class="link">Koleksi Saya</a>
+                </div>
+                <?php endif;?>
 
-          
-          <?php if($_SESSION['user'] === 'admin' || $_SESSION['user'] === 'petugas') :?>
-          <div class="bungkus-link">
-            <img src="../assets/icon-koleksi.png" alt="" />
-            <a href="list-buku-admin.php" class="link">Tambah Buku</a>
-          </div>
-          
-          <?php endif; ?>
-         
+                <?php if($_SESSION['user'] === 'admin' || $_SESSION['user'] === 'petugas') :?>
+                <div class="bungkus-link">
+                    <img src="../assets/icon-koleksi.png" alt="" />
+                    <a href="list-buku-admin.php" class="link">Tambah Buku</a>
+                </div>
+                <?php endif; ?>
             </div>
             <div class="col-lg-10 col-md-11 kanan-dasboard">
                 <nav class="navbar navbar-expand-lg navbar-light pt-4" style="background-color: #4682B4">
@@ -96,7 +93,7 @@ unset($_SESSION['notifikasiBerhasil']);
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                             <div style="margin-right: 25%">
                                 <ul class="navbar-nav">
-                                <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link menu me-4" style="color: white" aria-current="page" href="profil.php">Profil</a>
                                     </li>
                                     <li class="nav-item">
@@ -134,7 +131,6 @@ unset($_SESSION['notifikasiBerhasil']);
                 <div class="container">
                     <div class="judul text-center mt-5 mb-5"><h3>Daftar Koleksi Buku</h3></div>
 
-
                     <?php if(isset($notifikasiBerhasil) && $notifikasiBerhasil === 'gagal') : ?>
                         <div class="alert alert-danger" role="alert">
                             Gagal menghapus data peminjaman buku
@@ -164,13 +160,16 @@ unset($_SESSION['notifikasiBerhasil']);
                                     <td data-label="Tanggal Peminjaman"><?= $row['Penulis'] ?></td>
                                     <td data-label="Tanggal Pengembalian"><?= $row['Penerbit'] ?></td>
                                     <td data-label="Tanggal Pengembalian"><?= $row['TahunTerbit'] ?></td>
-                                    <td data-label="Aksi"><a href="koleksi.php?hapus=<?= $row['KoleksiID'] ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    <td data-label="Aksi">
+                                        <form method="POST" action="koleksi.php?hapus=<?= $row['KoleksiID'] ?>" onsubmit="return confirm('Apakah Anda yakin ingin menghapus koleksi ini?')">
+                                            <button type="submit" class="btn btn-danger" style="background-color: #4682B4; border-color: #ffffff;"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php $i += 1; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>

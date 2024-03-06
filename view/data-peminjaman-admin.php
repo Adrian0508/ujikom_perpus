@@ -180,7 +180,7 @@ unset($_SESSION['notifikasiBerhasil']);
                                     
                                     border-radius:40px; color:white; margin-bottom:5px;"><?= $row['StatusPeminjaman'] ?></p>
                                     </td>
-                                    <td data-label="Aksi"><a href="data-peminjaman-admin.php?hapus=<?= $row['PeminjamanID'] ?>" onclick="confirmDelete(<?= $row['PeminjamanID'] ?>)"><i class="fa-solid fa-trash"></i></a></td>
+                                    <td data-label="Aksi"><a href="#" onclick="confirmDelete(<?= $row['PeminjamanID'] ?>)"><i class="fa-solid fa-trash"></i></a></td>
                                 </tr>
                                 <?php $i += 1; ?>
                             <?php endforeach; ?>
@@ -192,6 +192,12 @@ unset($_SESSION['notifikasiBerhasil']);
         </div>
     </div>
     <script>
+        function confirmDelete(peminjamanID) {
+            if (confirm("Apakah Anda yakin ingin menghapus data peminjaman ini?")) {
+                window.location.href = "data-peminjaman-admin.php?hapus=" + peminjamanID;
+            }
+        }
+
         const printButton = document.getElementById('print-button');
         const tableToPrint = document.getElementById('table-to-print');
 
