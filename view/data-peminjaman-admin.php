@@ -136,7 +136,7 @@ unset($_SESSION['notifikasiBerhasil']);
                     <div class="judul text-center mt-5 mb-5">
                         <h3>Daftar Peminjaman Buku Seluruh Pengguna</h3>
                     </div>
-                    <button style="border:none; margin-bottom:20px; padding : 7px 20px; border-radius: 10px;" id="print-button" onclick="printPDF()">Print PDF</button>
+                    <button style="background:#4682B4; color:#fff; border:none; margin-bottom:20px; padding:7px 20px; border-radius:10px;" id="print-button" onclick="printPDF()">Print PDF</button>
 
 
                     <?php if (isset($notifikasiBerhasil) && $notifikasiBerhasil === 'gagal') : ?>
