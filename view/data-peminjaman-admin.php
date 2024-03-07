@@ -39,6 +39,21 @@ unset($_SESSION['notifikasiBerhasil']);
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="../style/list.css" />
+    <style>
+        /* CSS untuk tombol pencarian */
+        #searchButton {
+            background: #4682B4;
+            color: #fff;
+            border: none;
+            margin-bottom: 20px;
+            padding: 7px 20px;
+            border-radius: 10px;
+        }
+
+        #searchButton:hover {
+            background: #357ca5;
+        }
+    </style>
     <title>List buku</title>
 </head>
 
@@ -138,7 +153,6 @@ unset($_SESSION['notifikasiBerhasil']);
                     </div>
                     <button style="background:#4682B4; color:#fff; border:none; margin-bottom:20px; padding:7px 20px; border-radius:10px;" id="print-button" onclick="printPDF()">Print PDF</button>
 
-
                     <?php if (isset($notifikasiBerhasil) && $notifikasiBerhasil === 'gagal') : ?>
                         <div class="alert alert-danger" role="alert">
                             Gagal menghapus data peminjaman buku
@@ -148,6 +162,14 @@ unset($_SESSION['notifikasiBerhasil']);
                             Berhasil menghapus data peminjaman buku
                         </div>
                     <?php endif; ?>
+
+                    <!-- Search Input -->
+                    <form class="p-2 me-5 cari d-flex">
+                        <i class="fa-solid fa-magnifying-glass" style="margin-top:7px; margin-right:20px;color: #999999;"></i>
+                        <input autocomplete="off" class="form-control me-2" type="search" placeholder="Cari Buku" aria-label="Mencari" name="isi-pencarian" id="searchInput" onkeyup="searchTable()">
+                        <button name="cari-buku" type="submit" style="border:none; background-color: #006FD6; padding: 5px 25px; color: white; border-radius: 25px;">Cari</button>
+                    </form>
+
                     <table id="table-to-print">
                         <thead>
                             <tr>
@@ -197,6 +219,35 @@ unset($_SESSION['notifikasiBerhasil']);
                 window.location.href = "data-peminjaman-admin.php?hapus=" + peminjamanID;
             }
         }
+
+        function searchTable() {
+            // Mendapatkan nilai input pencarian
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table-to-print");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop melalui semua baris tabel, sembunyikan yang tidak cocok
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+
+        document.getElementById('searchButton').addEventListener('click', function() {
+            this.style.display = 'none'; // menyembunyikan tombol setelah di-klik
+        });
 
         const printButton = document.getElementById('print-button');
         const tableToPrint = document.getElementById('table-to-print');
